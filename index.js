@@ -20,6 +20,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 function run() {
   try {
     const categoriesCollection = client.db('laptop-zone').collection('category');
+
+    const productCollection = client.db('laptop-zone').collection('laptop-product');
    
     app.get('/category', async (req,res) => {
 
@@ -29,7 +31,15 @@ function run() {
       res.send(result)
 
    });
+   app.get('/ResellProducts', async (req,res) => {
 
+    const query = {};
+    const Products = ResellProductsCollection.find(query);    
+    const ResellProduct = await ResellProducts.toArray();
+    res.send(ResellProduct)
+
+ });
+    
   } finally {
   }
 }
